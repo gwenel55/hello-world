@@ -60,25 +60,21 @@ void DetectAction(bool Right)
 void MixIt()
 {
   a = analogRead(A1);
-  if(a == 1023)
+  if(a > 1000)
   {
-    delay(120);
+    delay(130);
     b = analogRead(A0);  
-    if(b == 1023)
+    if(b > 1000)
     { 
-      delay(120);
+      delay(130);
       c = analogRead(A1); 
-      if(c == 0)
+      if(c < 10)
       {
-        delay(120);
+        delay(130);
         d = analogRead(A0);  
-        if(d == 0)
+        if(d < 10)
         {
           Right = 1;
-          lcd.setCursor(5, 1);
-          lcd.print(Right);
-          delay(1000);
-          lcd.clear();
           DetectAction(Right);
         }
         else{
