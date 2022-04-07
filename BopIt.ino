@@ -43,27 +43,33 @@ void loop() {
   lcd.setCursor(2, 1);
   lcd.print(Score);
 
-  while(millis() < timeLimit
-  //random action 
-  randomAction = random(1,4);
+  while((currentMillis - previousMillis) < timeLimit)
+  {
+    //random action 
+    randomAction = random(1,4);
+  
+    if(randomAction == 1){
+      lcd.setCursor(5, 1);
+      lcd.print("Mix It");
+      delay(1000);
+      MixIt();
+    }
+    else if(randomAction == 2){
+      lcd.setCursor(5,1);
+      lcd.print("Cover It");
+      delay(1000);
+      CoverIt();
+    }
+    else if (randomAction == 3){
+      lcd.setCursor(5,1);
+      lcd.print("Bend It");
+      delay(1000);
+      BendIt();
+    }
 
-  if(randomAction == 1){
-    lcd.setCursor(5, 1);
-    lcd.print("Mix It");
-    delay(1000);
-    MixIt();
-  }
-  else if(randomAction == 2){
-    lcd.setCursor(5,1);
-    lcd.print("Cover It");
-    delay(1000);
-    CoverIt();
-  }
-  else if (randomAction == 3){
-    lcd.setCursor(5,1);
-    lcd.print("Bend It");
-    delay(1000);
-    BendIt();
+
+    previousMillis = currentMillis;
+    timeLimit = timeLimit - 101;
   }
   
 }
@@ -97,26 +103,8 @@ void MixIt()
     b = analogRead(A0);  
     if(b > 1000)
     { 
-      delay(130);
-      c = analogRead(A1); 
-      if(c < 10)
-      {
-        delay(130);
-        d = analogRead(A0);  
-        if(d < 10)
-        {
-          Right = 1;
-          DetectAction(Right);
-        }
-        else{
-          Right = 0;
-          DetectAction(Right);
-        }
-      }
-      else{
-          Right = 0;
-          DetectAction(Right);
-      }
+      Right = 1;
+      DetectAction(Right);
     }
     else{
           Right = 0;
@@ -130,32 +118,28 @@ void CoverIt()
 {
   
   if(digitalRead(photoResistor) == LOW){
-    int temp = 1;
-    if( temp == 1){
-      Right = 1;
-      DetectAction(Right);
-    }
-    temp++;
+    Right = 1;
+    DetectAction(Right);
   }
-  Right = 0;
-  //else{
-    //Right = 0;
-    //DetectAction(Right);
-  //}
-  //previousMillis = currentMillis;
+  
+  else{
+    Right = 0;
+    DetectAction(Right);
+  }
   
 }
 
 void BendIt()
 {
   if(digitalRead(flexSensor) == HIGH){
-    int temp = 1;
-    if( temp == 1){
-      Right = 1;
-      DetectAction(Right);
-    }
-    temp++;
+    Right = 1;
+    DetectAction(Right);
   }
-  Right = 0;
+
+  else{
+    Right = 0;
+    DetectAction(Right);
+  }
+  
  
 }
