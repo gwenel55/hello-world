@@ -145,7 +145,6 @@ void CoverIt()
   
   Right = 0;
   DetectAction(Right);
-  previousMillis = currentMillis;
   
 }
 
