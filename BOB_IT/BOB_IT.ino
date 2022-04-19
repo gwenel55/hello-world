@@ -21,23 +21,24 @@ unsigned long previousMillis = 0;
 unsigned long timeLimit = 10101;
 long randomAction;
 
-int photoResistor = 2; //digital pin 2
-int flexSensor = 9; //digital pin 9
-int buzzer = 3; //digital pin 3
+int photoResistor = 0; //digital pin 0
+int flexSensor = 1; //digital pin 9
+int buzzer = 5; //digital pin 3
 int pushButton = 4; //digital pin 4
 
 int buttonState = 0;
 
 void setup() {
+  //Wire.begin(A3, A2);
   // Initiate the LCD:
   lcd.init();
   lcd.backlight();
 
   //pins for the joystick
-  pinMode(8,INPUT); 
-  digitalWrite(8,HIGH); 
+  pinMode(2,INPUT); 
+  digitalWrite(2,HIGH); 
 
-  randomSeed(analogRead(2));
+  randomSeed(analogRead(1));
   //Start Game: Will go through this only once
   if(buttonState == LOW){
     lcd.setCursor(0,0);
